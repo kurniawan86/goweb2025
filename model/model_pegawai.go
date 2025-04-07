@@ -33,7 +33,6 @@ func ReadPegawai() []node.Pegawai {
 	return daftarPegawai
 }
 
-// UpdatePegawai memperbarui data pegawai berdasarkan id
 func UpdatePegawai(emp node.Pegawai, id int) bool {
 	temp := DaftarPegawai.Link
 	for temp != nil {
@@ -46,12 +45,10 @@ func UpdatePegawai(emp node.Pegawai, id int) bool {
 	return false
 }
 
-// DeletePegawai menghapus pegawai berdasarkan id
 func DeletePegawai(id int) bool {
 	temp := &DaftarPegawai
 	for temp.Link != nil {
 		if temp.Link.Data.ID == id {
-			// Hapus node dengan menghubungkan ke node berikutnya
 			temp.Link = temp.Link.Link
 			return true
 		}
