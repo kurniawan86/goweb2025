@@ -10,7 +10,8 @@ import (
 
 func Insert() {
 	var kota, nama, notelp, email string
-	var id, nomer int
+	var id, idJabatan, nomer int
+
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("Masukkan ID Pegawai: ")
@@ -36,22 +37,29 @@ func Insert() {
 	fmt.Print("Masukkan Email: ")
 	fmt.Scan(&email)
 
+	fmt.Print("Masukkan ID Jabatan: ")
+	fmt.Scan(&idJabatan)
+
 	// create new pegawai
 	pegawai := node.Pegawai{
-		ID:     id,
-		Nama:   nama,
-		Alamat: node.Address{jalan, kota, nomer},
-		NoTelp: notelp,
-		Email:  email,
+		ID:      id,
+		Nama:    nama,
+		Alamat:  node.Address{jalan, kota, nomer},
+		NoTelp:  notelp,
+		Email:   email,
+		Jabatan: idJabatan,
 	}
 
-	// insert to DaftarPegawai
-	cek := model.CreatePegawai(pegawai)
-	if cek {
+	// cek id Jabatan
+	cekJabatan := model.SearchJabatan(idJabatan)
+	if cekJabatan {
+		// insert to DaftarPegawai
+		model.CreatePegawai(pegawai)
 		fmt.Println("== Pegawai berhasil ditambahkan ==")
 	} else {
-		fmt.Println("Pegawai gagal ditambahkan")
+		fmt.Println("== ID Jabatan tidak ada di database ==")
 	}
+
 	fmt.Println()
 }
 
@@ -64,9 +72,10 @@ func Views() {
 		fmt.Println("Alamat\t\t: ", emp.Alamat.Jalan, emp.Alamat.Nomer, emp.Alamat.Kota)
 		fmt.Println("No Telepon\t: ", emp.NoTelp)
 		fmt.Println("Email\t\t: ", emp.Email)
+		fmt.Println("Nama Jabatan : ", model.GetNamaJabatan(emp.Jabatan))
 		fmt.Println()
 	}
-}
+
 
 func Update() {
 	var id, nomer int

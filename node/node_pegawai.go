@@ -6,11 +6,12 @@ type Address struct {
 }
 
 type Pegawai struct {
-	ID     int
-	Nama   string
-	Alamat Address
-	NoTelp string
-	Email  string
+	ID      int
+	Nama    string
+	Alamat  Address
+	NoTelp  string
+	Email   string
+	Jabatan int
 }
 
 type ListPegawai struct {

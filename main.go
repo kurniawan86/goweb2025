@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"linklist/model"
+	"linklist/node"
 	"linklist/view"
 	"os"
 	"strconv"
@@ -54,5 +56,38 @@ func menuUtama() {
 }
 
 func main() {
+	// menuUtama()
+
+	jab1 := node.Jabatan{
+		IdJabatan:   1,
+		NamaJabatan: "Manager",
+		Gaji:        10000000,
+	}
+
+	jab2 := node.Jabatan{
+		IdJabatan:   2,
+		NamaJabatan: "Supervisor",
+		Gaji:        8000000,
+	}
+
+	jab3 := node.Jabatan{
+		IdJabatan:   3,
+		NamaJabatan: "Staff",
+		Gaji:        6000000,
+	}
+
+	jab4 := node.Jabatan{
+		IdJabatan:   4,
+		NamaJabatan: "Intern",
+		Gaji:        3000000,
+	}
+
+	model.CreateJabatan(jab1)
+	model.CreateJabatan(jab2)
+	model.CreateJabatan(jab3)
+	model.CreateJabatan(jab4)
+
+	fmt.Println(model.ReadJabatan())
+
 	menuUtama()
 }
