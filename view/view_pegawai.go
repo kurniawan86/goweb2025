@@ -75,7 +75,7 @@ func Views() {
 		fmt.Println("Nama Jabatan : ", model.GetNamaJabatan(emp.Jabatan))
 		fmt.Println()
 	}
-
+}
 
 func Update() {
 	var id, nomer int

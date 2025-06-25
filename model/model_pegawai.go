@@ -45,6 +45,17 @@ func UpdatePegawai(emp node.Pegawai, id int) bool {
 	return false
 }
 
+func GetPegawaiById(id int) (node.Pegawai, bool) {
+
+	temp := DaftarPegawai.Link
+	for temp != nil {
+		if temp.Data.ID == id {
+			return temp.Data, true
+		}
+	}
+	return node.Pegawai{}, false
+}
+
 func DeletePegawai(id int) bool {
 	temp := &DaftarPegawai
 	for temp.Link != nil {
