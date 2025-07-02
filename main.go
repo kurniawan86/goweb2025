@@ -62,7 +62,7 @@ func seeder() {
 			Nomer: 10,
 			Jalan: "sidoresmo",
 		},
-		Jabatan: 1,
+		Jabatan: 2,
 		Email:   "aan@gmail.com",
 	}
 	model.CreatePegawai(pegawai2)
@@ -71,7 +71,6 @@ func seeder() {
 func Index(w http.ResponseWriter, r *http.Request) {
 	tmpl, _ := template.ParseFiles("templates/index.html")
 	dataPegawai := model.ReadPegawai()
-	fmt.Println(dataPegawai)
 	tmpl.Execute(w, dataPegawai)
 }
 
@@ -111,9 +110,12 @@ func InsertProcess(w http.ResponseWriter, r *http.Request) {
 
 func EditForm(w http.ResponseWriter, r *http.Request) {
 	idStr := r.URL.Query().Get("id")
+	fmt.Println(idStr)
 	id, _ := strconv.Atoi(idStr)
 
 	pegawai, ok := model.GetPegawaiById(id)
+	fmt.Println(model.GetPegawaiById(2))
+	fmt.Println("pegawai ", pegawai)
 	if !ok {
 		http.NotFound(w, r)
 		return
@@ -165,6 +167,7 @@ func DeletePegawai(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	seeder()
+	// fmt.Println(model.GetPegawaiById(2))
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/tambah", InsertForm)
 	http.HandleFunc("/insert", InsertProcess)
@@ -173,4 +176,5 @@ func main() {
 	http.HandleFunc("/delete", DeletePegawai)
 
 	http.ListenAndServe(":8080", nil)
+	// "http://localhost:8080"
 }
